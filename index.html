@@ -1,91 +1,329 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کارت ویزیت دیجیتال متین</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --text-color: #f8fafc;
-            --accent-color: #3b82f6;
-        }
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .card {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 5px;
-            font-size: 1.5rem;
-        }
-        p {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-        }
-        .btn {
-            display: block;
-            background-color: #2e3b4e;
-            color: var(--text-color);
-            text-decoration: none;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: 10px;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            font-size: 0.95rem;
-        }
-        .btn:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-        /* رنگ اختصاصی برای واتساپ و اینستاگرام جهت زیبایی بیشتر */
-        .btn-wa { border-right: 4px solid #25d366; }
-        .btn-ig { border-right: 4px solid #e1306c; }
-        .btn-call { border-right: 4px solid #3b82f6; }
-        .btn-web { border-right: 4px solid #f59e0b; }
-        .btn-loc { border-right: 4px solid #ef4444; }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f6f7fb" />
+  <title>کارت ویزیت دیجیتال | متین</title>
+
+  <style>
+    :root{
+      --bg: #f5f6fb;
+      --card: #ffffff;
+      --text: #101828;
+      --muted: #667085;
+      --line: #eaecf0;
+      --shadow: 0 12px 30px rgba(16, 24, 40, .10);
+
+      --brand: #2563eb;
+      --btn: #0b1220;
+
+      --radius: 22px;
+      --radius2: 18px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+    }
+
+    /* پس‌زمینه طرح خیلی ملایم شبیه تصویر */
+    .bg-pattern{
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12px 12px, rgba(16,24,40,.035) 2px, transparent 2.2px) 0 0/42px 42px;
+      pointer-events:none;
+      opacity: .9;
+    }
+
+    .wrap{
+      width: min(420px, 92vw);
+      margin: 0 auto;
+      padding: 18px 0 28px;
+      position: relative;
+    }
+
+    .top-card{
+      background: transparent;
+      border-radius: var(--radius);
+      padding: 14px 14px 10px;
+    }
+
+    .profile{
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-align:center;
+      padding-top: 6px;
+    }
+
+    .avatar{
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      background: #ddd;
+      border: 6px solid #fff;
+      box-shadow: 0 10px 22px rgba(16,24,40,.12);
+      overflow:hidden;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .name-row{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      justify-content:center;
+      margin-top: 4px;
+    }
+    .name{
+      font-weight: 800;
+      letter-spacing: -0.2px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 18px;
+      height: 18px;
+    }
+
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      max-width: 34ch;
+    }
+
+    /* آیکن‌های کوچک (تماس/پیام/لینک) */
+    .mini-actions{
+      display:flex;
+      gap: 14px;
+      justify-content:center;
+      margin-top: 12px;
+    }
+    .mini{
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 18px rgba(16,24,40,.08);
+      display:grid;
+      place-items:center;
+      text-decoration:none;
+      color: #111827;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .mini:active{ transform: scale(.98); }
+    .mini:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(16,24,40,.12); }
+
+    /* کارت شبکه‌های اجتماعی */
+    .grid-card{
+      margin-top: 14px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(234,236,240,.8);
+      padding: 18px 14px 14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .tile{
+      text-decoration:none;
+      color: var(--text);
+      display:flex;
+      flex-direction: column;
+      align-items:center;
+      gap: 10px;
+      padding: 12px 8px;
+      border-radius: 16px;
+      transition: transform .15s ease, background .15s ease;
+    }
+    .tile:hover{ background: #f7f8fd; transform: translateY(-1px); }
+    .tile:active{ transform: scale(.99); }
+
+    .icon{
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
+      box-shadow: 0 10px 22px rgba(16,24,40,.10);
+    }
+    .label{
+      font-size: 13px;
+      color: #101828;
+      font-weight: 700;
+    }
+
+    /* رنگ‌های آیکن‌ها */
+    .ig{ background: radial-gradient(circle at 30% 110%, #feda75 0%, #fa7e1e 25%, #d62976 55%, #962fbf 80%, #4f5bd5 100%); }
+    .tg{ background: #2aabee; }
+    .loc{ background: #ffffff; border: 1px solid rgba(0,0,0,.06); }
+    .wa{ background: #25D366; }
+    .web{ background: #0ea5e9; }
+    .yt{ background: #ff0033; }
+
+    /* دسترسی: فوکوس */
+    a:focus-visible{
+      outline: 3px solid rgba(37,99,235,.35);
+      outline-offset: 3px;
+      border-radius: 14px;
+    }
+
+    /* SVG sizing */
+    svg{ width: 28px; height: 28px; }
+    .mini svg{ width: 22px; height: 22px; }
+
+    /* فاصله پایین برای گوشی */
+    .spacer{ height: 10px; }
+  </style>
 </head>
+
 <body>
+  <div class="bg-pattern" aria-hidden="true"></div>
 
-<div class="card">
-    <h2>فروشگاه الکترونیک متین</h2>
-    <p>مرجع ماژول‌های الکترونیک و نمایشگرهای HMI DWIN</p>
-    
-    <!-- ۱. تماس تلفنی مستقیم -->
-    <a href="tel:09123456789" class="btn btn-call">📞 تماس با ما</a>
-    
-    <!-- ۲. واتساپ (ارسال پیام مستقیم بدون نیاز به ذخیره شماره) -->
-    <a href="https://wa.me/989123456789" class="btn btn-wa" target="_blank">💬 پیام در واتساپ</a>
-    
-    <!-- ۳. اینستاگرام -->
-    <a href="https://instagram.com/YourPage" class="btn btn-ig" target="_blank">📸 اینستاگرام فروشگاه</a>
-    
-    <!-- ۴. آدرس وب‌سایت -->
-    <a href="https://YourWebsite.com" class="btn btn-web" target="_blank">🌐 وب‌سایت رسمی</a>
-    
-    <!-- ۵. آدرس فیزیکی فروشگاه (لینک گوگل مپ یا بلد/نشان) -->
-    <a href="https://maps.google.com/?q=Latitude,Longitude" class="btn btn-loc" target="_blank">📍 موقعیت فروشگاه روی نقشه</a>
-</div>
+  <main class="wrap">
 
+    <!-- کارت بالا (بدون بنر تصویر بزرگ) -->
+    <section class="top-card">
+      <div class="profile">
+
+        <div class="avatar" title="Profile">
+          <!-- تصویر خودت را جایگزین کن: avatar.jpg یا لینک مستقیم -->
+          <img src="avatar.jpg" alt="پروفایل" />
+        </div>
+
+        <div class="name-row">
+          <div class="name">متین</div>
+          <!-- تیک آبی -->
+          <span class="badge" aria-label="تأیید شده">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2.5l2.3 2.0 3-.2 1.3 2.7 2.7 1.3-.2 3 2 2.3-2 2.3.2 3-2.7 1.3-1.3 2.7-3-.2-2.3 2-2.3-2-3 .2-1.3-2.7-2.7-1.3.2-3-2-2.3 2-2.3-.2-3 2.7-1.3 1.3-2.7 3 .2L12 2.5z" fill="#1D4ED8"/>
+              <path d="M10.6 12.6l-1.7-1.7-1.2 1.2 2.9 2.9 5.7-5.7-1.2-1.2-4.5 4.5z" fill="#fff"/>
+            </svg>
+          </span>
+        </div>
+
+        <p class="subtitle">
+          فروش ماژول‌های الکترونیک و نمایشگرهای HMI DWIN
+        </p>
+
+        <!-- آیکن‌های کوچک: تماس / پیام / لینک -->
+        <div class="mini-actions">
+          <a class="mini" href="tel:+989123456789" aria-label="تماس">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M7.2 3.6l2.2-.6c.6-.2 1.2.1 1.5.7l1 2.4c.2.6.1 1.2-.4 1.6l-1.2 1c.9 1.9 2.3 3.3 4.2 4.2l1-1.2c.4-.5 1.1-.6 1.6-.4l2.4 1c.6.3.9.9.7 1.5l-.6 2.2c-.2.6-.7 1-1.3 1.1-7 .8-12.6-4.8-11.8-11.8.1-.6.5-1.1 1.1-1.3z" fill="#111827"/>
+            </svg>
+          </a>
+
+          <a class="mini" href="https://wa.me/989123456789" target="_blank" rel="noopener" aria-label="واتساپ">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2.2a9.5 9.5 0 0 0-8.2 14.3L3 21l4.6-1.2A9.5 9.5 0 1 0 12 2.2z" fill="#25D366"/>
+              <path d="M9.1 7.8c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2 0 1.3 1 2.6 1.1 2.8.2.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.1-1.3-.1-.2-.4-.3-.8-.5l-1.9-.9c-.3-.1-.6-.2-.9.2l-.7.9c-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6L9.1 7.8z" fill="#fff"/>
+            </svg>
+          </a>
+
+          <a class="mini" href="https://yourwebsite.com" target="_blank" rel="noopener" aria-label="وبسایت">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M10 14a5 5 0 0 1 0-4l1.1-1.1a5 5 0 0 1 7.1 7.1L17 17a5 5 0 0 1-4 1.5" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+              <path d="M14 10a5 5 0 0 1 0 4l-1.1 1.1a5 5 0 1 1-7.1-7.1L7 7a5 5 0 0 1 4-1.5" stroke="#111827" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- کارت پایین: 6 آیکن -->
+    <section class="grid-card" aria-label="راه‌های ارتباطی">
+      <div class="grid">
+
+        <a class="tile" href="https://instagram.com/YourPage" target="_blank" rel="noopener">
+          <div class="icon ig" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M7.5 2.8h9A4.7 4.7 0 0 1 21.2 7.5v9a4.7 4.7 0 0 1-4.7 4.7h-9A4.7 4.7 0 0 1 2.8 16.5v-9A4.7 4.7 0 0 1 7.5 2.8z" stroke="#fff" stroke-width="2"/>
+              <path d="M12 8.7a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6z" stroke="#fff" stroke-width="2"/>
+              <path d="M17.3 6.7h.01" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="label">اینستاگرام</div>
+        </a>
+
+        <a class="tile" href="https://t.me/YourID" target="_blank" rel="noopener">
+          <div class="icon tg" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M21 5.6L3.8 12.4c-.8.3-.8 1.4.1 1.6l4.2 1 1.6 4.9c.3.9 1.5 1 1.9.2l2.4-3.9 4.4 3.2c.6.4 1.5.1 1.6-.7l2.6-12c.2-.9-.7-1.6-1.6-1.1z" fill="#fff" opacity=".95"/>
+              <path d="M9 14l9-7" stroke="#2aabee" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="label">تلگرام من</div>
+        </a>
+
+        <a class="tile" href="https://maps.google.com/?q=35.6892,51.3890" target="_blank" rel="noopener">
+          <div class="icon loc" aria-hidden="true">
+            <!-- پین ساده با رنگ‌های نزدیک به گوگل -->
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="#EA4335"/>
+              <circle cx="12" cy="10" r="3" fill="#4285F4"/>
+            </svg>
+          </div>
+          <div class="label">لوکیشن</div>
+        </a>
+
+        <a class="tile" href="https://wa.me/989123456789" target="_blank" rel="noopener">
+          <div class="icon wa" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 2.2a9.5 9.5 0 0 0-8.2 14.3L3 21l4.6-1.2A9.5 9.5 0 1 0 12 2.2z" fill="#fff" opacity=".22"/>
+              <path d="M9.1 7.8c-.2-.5-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.4-.2.3-.9.9-.9 2.2 0 1.3 1 2.6 1.1 2.8.2.2 2 3.1 4.9 4.2 2.4 1 2.9.8 3.4.7.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.1-1.3-.1-.2-.4-.3-.8-.5l-1.9-.9c-.3-.1-.6-.2-.9.2l-.7.9c-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4-.9-.8-1.4-1.8-1.6-2.1-.2-.3 0-.5.1-.6l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6L9.1 7.8z" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="label">واتساپ</div>
+        </a>
+
+        <a class="tile" href="https://yourwebsite.com" target="_blank" rel="noopener">
+          <div class="icon web" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" fill="#fff" opacity=".22"/>
+              <path d="M2.8 12h18.4" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 2.8c2.8 2.5 4.3 5.7 4.3 9.2S14.8 18.7 12 21.2C9.2 18.7 7.7 15.5 7.7 12S9.2 5.3 12 2.8z" stroke="#fff" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="label">وبسایت</div>
+        </a>
+
+        <a class="tile" href="https://youtube.com/@YourChannel" target="_blank" rel="noopener">
+          <div class="icon yt" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M21.2 8.2a3 3 0 0 0-2.1-2.1C17.2 5.6 12 5.6 12 5.6s-5.2 0-7.1.5A3 3 0 0 0 2.8 8.2a31.5 31.5 0 0 0 0 7.6 3 3 0 0 0 2.1 2.1c1.9.5 7.1.5 7.1.5s5.2 0 7.1-.5a3 3 0 0 0 2.1-2.1 31.5 31.5 0 0 0 0-7.6z" fill="#fff" opacity=".22"/>
+              <path d="M10.2 15.4V8.6l6 3.4-6 3.4z" fill="#fff"/>
+            </svg>
+          </div>
+          <div class="label">یوتیوب</div>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+  </main>
 </body>
 </html>
