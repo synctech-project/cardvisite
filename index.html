@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کارت ویزیت دیجیتال متین</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --accent-color: #3b82f6;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+        .btn {
+            display: block;
+            background-color: #2e3b4e;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+        }
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        /* رنگ اختصاصی برای واتساپ و اینستاگرام جهت زیبایی بیشتر */
+        .btn-wa { border-right: 4px solid #25d366; }
+        .btn-ig { border-right: 4px solid #e1306c; }
+        .btn-call { border-right: 4px solid #3b82f6; }
+        .btn-web { border-right: 4px solid #f59e0b; }
+        .btn-loc { border-right: 4px solid #ef4444; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>فروشگاه الکترونیک متین</h2>
+    <p>مرجع ماژول‌های الکترونیک و نمایشگرهای HMI DWIN</p>
+    
+    <!-- ۱. تماس تلفنی مستقیم -->
+    <a href="tel:09123456789" class="btn btn-call">📞 تماس با ما</a>
+    
+    <!-- ۲. واتساپ (ارسال پیام مستقیم بدون نیاز به ذخیره شماره) -->
+    <a href="https://wa.me/989123456789" class="btn btn-wa" target="_blank">💬 پیام در واتساپ</a>
+    
+    <!-- ۳. اینستاگرام -->
+    <a href="https://instagram.com/YourPage" class="btn btn-ig" target="_blank">📸 اینستاگرام فروشگاه</a>
+    
+    <!-- ۴. آدرس وب‌سایت -->
+    <a href="https://YourWebsite.com" class="btn btn-web" target="_blank">🌐 وب‌سایت رسمی</a>
+    
+    <!-- ۵. آدرس فیزیکی فروشگاه (لینک گوگل مپ یا بلد/نشان) -->
+    <a href="https://maps.google.com/?q=Latitude,Longitude" class="btn btn-loc" target="_blank">📍 موقعیت فروشگاه روی نقشه</a>
+</div>
+
+</body>
+</html>
